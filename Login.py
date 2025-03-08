@@ -73,4 +73,16 @@ def generarLogin():
                 st.error('usuario o clave invalidos', icon=":material/gpp_maybe:")    
         
         
-        
+          
+    with st.form('frmLogin'):
+        parUsuario = st.text_input('Usuario')       
+        parPassword = st.text_input('Password',type='password')  
+        btnLogin = st.form_submit_button('enter', type='primary')
+        if btnLogin:
+            if validarUsuario(parUsuario, parPassword):
+                st.session_state['usuario'] =parUsuario
+                #si el usuario es correcto reiniciamos la app para que se cargue el menu
+                st.rerun()
+            else:
+                # si el usuario es inbvalido mostramos el mensaje de error
+                st.error("usuario o clave invalidos!,icon=":material/gpp_maybe:")
